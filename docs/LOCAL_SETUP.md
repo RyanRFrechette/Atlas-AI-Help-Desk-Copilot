@@ -17,7 +17,7 @@ PowerShell-first setup guide for Windows. All commands tested on Windows 11 with
 ## 1. Clone the Repository
 
 ```powershell
-git clone https://github.com/yourusername/Atlas-AI-Help-Desk-Copilot.git
+git clone https://github.com/RyanRFrechette/Atlas-AI-Help-Desk-Copilot.git
 cd Atlas-AI-Help-Desk-Copilot
 ```
 
