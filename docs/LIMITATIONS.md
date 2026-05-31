@@ -9,7 +9,7 @@ This document is intentionally direct about what Atlas does not do. These limita
 Atlas uses 8 hand-written tickets and 8 KB articles stored in JSON files.
 
 - There is no connection to any live ticket system (ServiceNow, Jira, Freshdesk, etc.)
-- There are no real users, real accounts, or real organizational data
+- There are no real users, real accounts, or real organisational data
 - All names, departments, email addresses, ticket IDs, and timestamps are fictional
 - The dataset is not representative of a real queue's distribution, volume, or edge-case diversity
 
@@ -55,7 +55,7 @@ All triage outputs are **suggestions**, not decisions. A technician must review 
 
 Atlas does not know:
 
-- Your organization's SLAs, escalation thresholds, or staffing policies
+- Your organisation's SLAs, escalation thresholds, or staffing policies
 - Whether a specific user is a VIP, contractor, or high-risk account
 - The current threat landscape or active incidents
 - Whether a KB article applies to a specific system version or configuration

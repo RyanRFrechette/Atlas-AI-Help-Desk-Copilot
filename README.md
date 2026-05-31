@@ -26,7 +26,7 @@ Tier 1 help desk agents handle high ticket volume and spend significant time on 
 
 | Feature | What It Does |
 |---|---|
-| **Dashboard metrics** | Live queue summary: total tickets, high/urgent count, escalation candidates, security flags |
+| **Dashboard metrics** | Queue overview: total tickets, high/urgent count, escalation candidates, security flags |
 | **Ticket selector** | 8 realistic demo tickets covering the most common IT support scenarios |
 | **Custom ticket input** | Paste any ticket subject and description; Atlas classifies it on the fly |
 | **Deterministic triage** | Category, priority, confidence, and risk level — no AI, fully explainable |

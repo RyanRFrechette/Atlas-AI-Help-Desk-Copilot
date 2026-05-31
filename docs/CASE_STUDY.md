@@ -62,7 +62,9 @@ The project was built in five phases following a strict phase-gate discipline:
 | 2 | Deterministic triage engine with 17 triage tests |
 | 3 | Streamlit MVP with 4 module integrity tests |
 | 4 | Realism polish — priority correction, KB accuracy fixes, UI wording |
-| 5 | Portfolio documentation |
+| 5 | Portfolio documentation — README, case study, use cases, demo script |
+| 6 | Screenshots — demo URL mode, 5 screenshot captures, README image embeds |
+| 7 | Final QA — doc consistency, spelling, broken link check, qa-reviewer agent |
 
 Each phase was committed separately to show a clean, intentional development history.
 
