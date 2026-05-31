@@ -64,6 +64,103 @@ st.divider()
 
 # ── Demo mode — ?ticket=TKT-007 pre-selects and auto-analyzes ────────────────
 _demo_id = st.query_params.get("ticket", "")
+_demo_video = st.query_params.get("demo", "") == "video"
+
+if _demo_video:
+    _phishing = next(t for t in tickets if t["id"] == "TKT-007")
+    _res = triage_ticket(_phishing)
+    _risk = _res["risk_level"]
+
+    st.info(
+        "🎬  **Demo Recording Mode — Atlas AI Help Desk Copilot**  "
+        "| Scroll top → bottom over 60–90 seconds."
+    )
+    st.markdown(
+        "**Atlas** is a deterministic triage assistant for IT help desk teams — "
+        "classifies tickets, surfaces KB articles, and generates technician guidance "
+        "so agents spend less time on intake and more time resolving."
+    )
+    st.divider()
+
+    # ── Selected Ticket Summary ───────────────────────────────────────────────
+    st.subheader("Selected Ticket — TKT-007")
+    tc1, tc2 = st.columns(2)
+    with tc1:
+        st.markdown(f"**Subject:** {_phishing['subject']}")
+        st.markdown(f"**Submitter:** {_phishing['submitter']} · {_phishing['department']}")
+        st.markdown(f"**Status:** `{_phishing['status'].upper()}`")
+    with tc2:
+        pri = _phishing["priority"]
+        st.markdown(f"**Priority:** {PRIORITY_ICON.get(pri, '')} `{pri.upper()}`")
+        st.markdown(f"**Category:** `{_phishing['category']}`")
+        st.markdown(f"**Created:** {_phishing['created_at']}")
+    st.markdown(f"> {_phishing['description']}")
+    st.divider()
+
+    # ── Triage Result Cards ───────────────────────────────────────────────────
+    st.subheader("Triage Results")
+    dr1, dr2, dr3, dr4 = st.columns(4)
+    dr1.metric("Category", _res["issue_category"].title())
+    dr2.metric("Priority", _res["priority"].upper())
+    dr3.metric("Confidence", _res["confidence"].title())
+    dr4.metric("Risk Level", f"{RISK_ICON.get(_risk, '')} {_risk.title()}")
+    st.markdown("")
+    st.error(f"⚠ **Escalation Recommended** — {_res['escalation_reason']}")
+    st.divider()
+
+    # ── Matching KB Articles ──────────────────────────────────────────────────
+    st.subheader("Matching KB Articles")
+    for entry in _res["matching_kb_articles"]:
+        st.markdown(f"#### {entry['id']} — {entry['title']}")
+        if entry.get("symptoms"):
+            st.markdown("**Symptoms:**")
+            for s in entry["symptoms"]:
+                st.markdown(f"- {s}")
+        if entry.get("escalation_triggers"):
+            st.markdown("**Escalation Triggers:**")
+            for trigger in entry["escalation_triggers"]:
+                st.markdown(f"- ⚠ {trigger}")
+        st.markdown("")
+    st.divider()
+
+    # ── Troubleshooting Checklist ─────────────────────────────────────────────
+    st.subheader("Troubleshooting Checklist")
+    for i, step in enumerate(_res["troubleshooting_checklist"], 1):
+        st.checkbox(step, key=f"demo_chk_{i}")
+    st.divider()
+
+    # ── Customer Response Draft ───────────────────────────────────────────────
+    st.subheader("Customer-Facing Response Draft")
+    st.caption("Review and personalise before sending. Do not send unreviewed output.")
+    st.text_area(
+        "demo_response",
+        value=_res["customer_response_draft"],
+        height=250,
+        label_visibility="collapsed",
+    )
+    st.divider()
+
+    # ── Technician Notes ──────────────────────────────────────────────────────
+    st.subheader("Technician Notes")
+    st.caption("Internal guidance — not visible to end users.")
+    st.markdown(_res["technician_notes"])
+    st.divider()
+
+    # ── Resolution Documentation Template ────────────────────────────────────
+    st.subheader("Resolution Documentation Template")
+    st.caption("Complete after resolving the ticket.")
+    st.text_area(
+        "demo_resolution",
+        value=_res["resolution_documentation_template"],
+        height=350,
+        label_visibility="collapsed",
+    )
+    st.divider()
+    st.caption(
+        "Atlas uses deterministic demo data only. Technician review required. "
+        "No live systems, no AI models, no real user data."
+    )
+    st.stop()
 
 # ── Ticket Input ───────────────────────────────────────────────────────────────
 st.subheader("Analyze a Ticket")

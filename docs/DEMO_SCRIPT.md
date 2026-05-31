@@ -90,6 +90,47 @@ Use this script for a live demo, screen share, or recorded walkthrough. The phis
 
 ---
 
+## Automated Recording Mode
+
+**URL:** `http://localhost:8501?demo=video`
+
+**Launch (PowerShell from repo root):**
+```powershell
+.\scripts\Start-AtlasDemoRecording.ps1
+```
+
+Or manually: `streamlit run app.py` then open `http://localhost:8501?demo=video`
+
+### What it shows (no clicks required)
+
+Pre-analyzed TKT-007 phishing ticket, full page top to bottom:
+
+1. Demo banner + project purpose
+2. Dashboard metrics
+3. Phishing ticket summary
+4. Triage result cards (Category · Priority · Confidence · Risk)
+5. Escalation banner
+6. Matching KB article (expanded)
+7. Troubleshooting checklist
+8. Customer response draft
+9. Technician notes
+10. Resolution documentation template
+11. Disclaimer footer
+
+### 60–90 second narration outline
+
+| Time | Section | Narration focus |
+|---|---|---|
+| 0–10s | Banner + dashboard | Introduce Atlas, queue metrics |
+| 10–20s | Ticket summary | Describe phishing scenario |
+| 20–35s | Triage cards + escalation | Security override, Critical risk, why escalation fires |
+| 35–50s | KB article + checklist | Step ordering — credential check is step 1 |
+| 50–65s | Response draft | Review-before-send warning, customer tone |
+| 65–80s | Tech notes + resolution template | Cmdlets, playbook reference, documentation discipline |
+| 80–90s | Footer | Deterministic, no AI, technician review required |
+
+---
+
 ## Anticipated Questions
 
 **"Is this using ChatGPT or an AI model?"**
