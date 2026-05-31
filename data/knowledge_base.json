@@ -1,71 +1,202 @@
 [
   {
     "id": "KB-001",
-    "category": "network",
-    "title": "VPN Connection Failures (Error 691)",
-    "steps": [
-      "Verify credentials — error 691 is usually wrong username or password.",
-      "Ensure you are using the correct VPN profile (corporate vs. split-tunnel).",
-      "Disable any third-party firewalls temporarily and retry.",
-      "Flush DNS: run 'ipconfig /flushdns' in an elevated command prompt.",
-      "If issue persists, submit ticket with output of 'ipconfig /all'."
-    ]
+    "title": "Password Reset — Self-Service and Assisted",
+    "category": "access",
+    "symptoms": [
+      "User forgot Windows or M365 password",
+      "Account locked after failed login attempts",
+      "Cannot log in to laptop or corporate portal"
+    ],
+    "troubleshooting_steps": [
+      "Direct user to self-service portal: password.example.com — works if MFA is enrolled.",
+      "If MFA is not enrolled or portal fails, verify identity via manager confirmation or employee ID.",
+      "Perform admin reset in Active Directory Users and Computers (ADUC): right-click account > Reset Password.",
+      "Check 'User must change password at next logon' and uncheck 'Account is locked out'.",
+      "Confirm user can log in before closing. Remind them to update saved credentials in browser and mail client."
+    ],
+    "escalation_triggers": [
+      "Account locked more than three times in one day — escalate to security team.",
+      "User reports they did not initiate the lockouts — possible credential compromise.",
+      "Password reset alone does not restore access to all systems."
+    ],
+    "technician_notes": "Check AD event logs: Event ID 4740 = lockout source, 4625 = failed login details. If lockout source is a service account or unknown workstation, escalate immediately. Do not reset without identity verification."
   },
   {
     "id": "KB-002",
-    "category": "email",
-    "title": "Outlook Crashes After Windows Update",
-    "steps": [
-      "Open Outlook in safe mode: hold Ctrl while clicking the Outlook icon.",
-      "If safe mode works, disable add-ins one by one under File > Options > Add-ins.",
-      "Run 'Office Repair' via Control Panel > Programs > Microsoft 365.",
-      "If crash persists, collect crash dump from Event Viewer and escalate."
-    ]
+    "title": "Account Lockout — Security Investigation",
+    "category": "access",
+    "symptoms": [
+      "Account locked multiple times in one day",
+      "Lockouts occurring without user's knowledge",
+      "Lockout source IP does not match user's normal location"
+    ],
+    "troubleshooting_steps": [
+      "Pull AD lockout events: Get-ADUser <username> -Properties LockedOut, BadLogonCount, LastBadPasswordAttempt.",
+      "Check Event ID 4740 on the PDC emulator to identify the lockout source machine.",
+      "Review sign-in logs in Azure AD (Entra ID) for unfamiliar IPs or locations.",
+      "Temporarily disable any saved credentials on the user's devices: Credential Manager > Windows Credentials.",
+      "If lockout source is unrecognised, reset password immediately and escalate to security team.",
+      "Check if the user's email address appears in any recent phishing campaigns."
+    ],
+    "escalation_triggers": [
+      "Lockout source IP is outside the corporate network or known remote-work ranges.",
+      "Three or more lockouts in one day not attributable to the user.",
+      "Any sign of credential reuse or phishing link clicked by the user."
+    ],
+    "technician_notes": "Use Microsoft Entra ID (Azure AD) sign-in logs filtered by user for the past 7 days. Look for failed MFA challenges, unfamiliar device IDs, or impossible travel patterns. Always loop in the security team before reassuring the user everything is fine."
   },
   {
     "id": "KB-003",
-    "category": "access",
-    "title": "Shared Drive Access Request",
-    "steps": [
-      "Manager must submit an access request via the IT portal.",
-      "Access is provisioned within one business day of manager approval.",
-      "Drive mappings auto-apply at next login; no manual mapping needed.",
-      "If drive does not appear after 24 hours, run 'gpupdate /force' and log off/on."
-    ]
+    "title": "Slow Startup — High Disk Usage After Windows Update",
+    "category": "hardware",
+    "symptoms": [
+      "Boot time exceeds 5 minutes after Windows Update",
+      "100% disk usage in Task Manager after login",
+      "Applications slow or unresponsive for 10+ minutes post-login"
+    ],
+    "troubleshooting_steps": [
+      "Open Task Manager > Startup tab. Disable all non-essential startup programs.",
+      "In Task Manager > Performance > Disk, identify the process causing 100% disk usage.",
+      "Common culprits: Windows Update (TiWorker.exe), Antivirus scan (MsMpEng.exe), SysMain (Superfetch) on HDD.",
+      "If drive is HDD, check health with CrystalDiskInfo — high reallocated sectors = replace drive.",
+      "If SSD, run: 'Get-PhysicalDisk | Get-StorageReliabilityCounter' in PowerShell to check wear.",
+      "Disable SysMain if on SSD: Services.msc > Superfetch > Disabled.",
+      "Run 'sfc /scannow' in elevated PowerShell to check for corrupted system files post-update."
+    ],
+    "escalation_triggers": [
+      "CrystalDiskInfo reports drive health as 'Caution' or 'Bad'.",
+      "sfc /scannow reports unrepairable system file corruption.",
+      "Issue persists after all startup optimisations — consider OS reinstall or hardware replacement."
+    ],
+    "technician_notes": "If boot time is over 10 minutes on a machine less than 3 years old, suspect a Windows Update issue first. Check Windows Update history for any failed or pending updates. KB5034441 (Jan 2024 WinRE update) has a known failure loop — check for that specifically."
   },
   {
     "id": "KB-004",
+    "title": "Network Printer Offline — Diagnosis and Resolution",
     "category": "hardware",
-    "title": "Offline Network Printer — Quick Fixes",
-    "steps": [
-      "Check the printer LCD for error messages or paper jams.",
-      "Power-cycle the printer (off, wait 30 seconds, on).",
-      "Verify the printer IP has not changed — compare to the IT asset register.",
-      "Delete and re-add the printer on affected machines if IP changed.",
-      "For persistent offline status, escalate to on-site hardware support."
-    ]
+    "symptoms": [
+      "Printer shows offline in Windows print queue",
+      "Multiple users on the same floor affected",
+      "Print jobs queued but not printing"
+    ],
+    "troubleshooting_steps": [
+      "Check the printer LCD panel for error messages, paper jams, or low toner alerts.",
+      "Power-cycle the printer: hold the power button off, wait 30 seconds, power back on.",
+      "Confirm the printer IP address from the LCD: Menu > Reports > Network Configuration Page.",
+      "Compare current IP to the IT asset register. If changed, update the print server.",
+      "To update IP on print server: Print Management console > Printers > right-click > Properties > Ports > Configure Port.",
+      "If IP is correct, ping the printer from an affected workstation: 'ping <printer-ip>'.",
+      "If ping fails, check the network switch port the printer is connected to — may need re-seating or port reset.",
+      "Delete and re-add the printer on affected workstations if the port update alone does not resolve it."
+    ],
+    "escalation_triggers": [
+      "Printer does not respond to ping after power cycle — possible NIC failure.",
+      "Multiple printers on the same subnet affected simultaneously — suspect switch or VLAN issue.",
+      "Printer needs firmware update that requires vendor support access."
+    ],
+    "technician_notes": "HP LaserJet models frequently acquire a new DHCP lease after a power cycle if not set to a static IP. Check the DHCP server (or router) for the current lease. Long-term fix: assign a static IP or DHCP reservation in the router/server for all managed printers."
   },
   {
     "id": "KB-005",
-    "category": "access",
-    "title": "Account Lockout and Password Reset",
-    "steps": [
-      "Self-service reset available at password.example.com if MFA is enrolled.",
-      "For urgent resets, call the IT hotline: ext. 4357 (HELP).",
-      "After reset, update saved credentials in browser and mail clients.",
-      "Three or more lockouts in one day triggers a security review."
-    ]
+    "title": "VPN Drops Repeatedly — GlobalProtect Stability Issues",
+    "category": "network",
+    "symptoms": [
+      "VPN disconnects every 20–30 minutes",
+      "VPN client shows connected but traffic stops",
+      "Issue occurs only when working remotely, not on-site"
+    ],
+    "troubleshooting_steps": [
+      "Confirm GlobalProtect client version: Help > About. Minimum supported version is 6.1. Upgrade if below.",
+      "Check if ISP connection is stable during the drop: run a continuous ping to 8.8.8.8 and watch for drops.",
+      "Rule out MTU mismatch: run 'ping 8.8.8.8 -f -l 1400' in cmd. If it fails, MTU fragmentation is the issue.",
+      "Set MTU fix: 'netsh interface ipv4 set subinterface \"Wi-Fi\" mtu=1350 store=persistent'.",
+      "Check Windows power management: Device Manager > Network Adapters > right-click Wi-Fi adapter > Properties > Power Management > uncheck 'Allow computer to turn off this device'.",
+      "Review GlobalProtect gateway logs: C:\\ProgramData\\Palo Alto Networks\\GlobalProtect\\PanGPS.log.",
+      "If logs show 'keep-alive timeout', ask network team to check gateway session timeout settings."
+    ],
+    "escalation_triggers": [
+      "MTU fix does not resolve drops — may require gateway-side configuration change.",
+      "Multiple remote users reporting the same disconnect pattern — possible gateway issue.",
+      "GlobalProtect logs show certificate errors or authentication timeouts."
+    ],
+    "technician_notes": "VPN drops every 20–30 minutes on residential connections are often caused by home routers timing out idle sessions. Ask the user to check their router's session timeout setting (if accessible). Palo Alto GlobalProtect keep-alive interval default is 10 seconds — if still dropping, escalate to network team to verify gateway health."
   },
   {
     "id": "KB-006",
-    "category": "network",
-    "title": "Microsoft Teams Video Quality Issues",
-    "steps": [
-      "Lower Teams video resolution: Settings > Devices > reduce camera resolution.",
-      "Check for background applications consuming bandwidth.",
-      "Switch to wired Ethernet if on Wi-Fi.",
-      "Update Teams to the latest version via Help > Check for updates.",
-      "If on VPN, try split-tunnel mode to reduce video traffic through the tunnel."
-    ]
+    "title": "Outlook Desktop Not Syncing — M365 Exchange Issues",
+    "category": "email",
+    "symptoms": [
+      "Outlook shows 'Connected' but new emails do not arrive",
+      "Emails visible in OWA and mobile app but not desktop Outlook",
+      "Status bar shows last sync time stuck hours ago"
+    ],
+    "troubleshooting_steps": [
+      "Check M365 service health first: admin.microsoft.com > Health > Service health. Rule out tenant-wide outage.",
+      "Remove and re-add the Exchange account: File > Account Settings > select account > Remove, then re-add.",
+      "If removing the account is not practical, try clearing the Outlook cache: rename the OST file at %localappdata%\\Microsoft\\Outlook\\. Outlook will rebuild it.",
+      "Run 'Outlook /cleanprofile' from Run (Win+R) to reset the Outlook profile.",
+      "Check for conflicting add-ins: File > Options > Add-ins > COM Add-ins > disable all, restart, re-enable one by one.",
+      "Verify AutoDiscover is working: hold Ctrl, right-click the Outlook tray icon > Test Email AutoConfiguration.",
+      "If AutoDiscover fails, check DNS for autodiscover.example.com CNAME record — may need IT network team."
+    ],
+    "escalation_triggers": [
+      "M365 service health shows an active Exchange incident.",
+      "AutoDiscover test fails despite correct DNS records.",
+      "Rebuilding OST file does not resolve sync after 1 hour.",
+      "Multiple users in the same department affected — possible mailbox quota or policy issue."
+    ],
+    "technician_notes": "OST rebuild can take 30–60 minutes for large mailboxes. Warn the user before doing this during business hours. Most single-user sync failures are resolved by account removal/re-add or OST rename. If the issue is tenant-wide, open a P2 ticket with Microsoft Support immediately."
+  },
+  {
+    "id": "KB-007",
+    "title": "Phishing Email Response — Reporting and Containment",
+    "category": "security",
+    "symptoms": [
+      "User received email impersonating IT, HR, or management requesting credentials",
+      "Email contains link to external login page mimicking corporate portal",
+      "Email domain does not match official company domain"
+    ],
+    "troubleshooting_steps": [
+      "FIRST: Confirm whether the user clicked any links or entered credentials. If yes, escalate immediately — do not proceed with Tier 1 steps.",
+      "If no links clicked: reassure the user they did the right thing by not clicking.",
+      "Collect the phishing email headers: File > Properties (Outlook) or 'Show original' (OWA). Forward to security@example.com.",
+      "Report the email via the Phish Alert Button (PAB) in Outlook if deployed, or forward to phish@example.com.",
+      "Delete the email from the user's inbox and Deleted Items folder.",
+      "Check if other users received the same message: search Exchange message trace in M365 admin center for the sender domain.",
+      "If campaign is ongoing, submit sender domain to the email gateway team for immediate block."
+    ],
+    "escalation_triggers": [
+      "User clicked the phishing link — escalate to Tier 2 security immediately.",
+      "User entered credentials on the phishing page — treat as active credential compromise.",
+      "More than three users received the same phishing email — treat as targeted campaign.",
+      "Email passed SPF/DKIM/DMARC checks — indicates possible vendor account compromise."
+    ],
+    "technician_notes": "All phishing reports must be logged in the security ticketing queue regardless of whether the user clicked. Check the sender domain against known phishing feeds (VirusTotal, URLhaus). If credentials were entered, initiate the Credential Compromise playbook: force password reset, revoke all sessions in Entra ID (Revoke-AzureADUserAllRefreshToken), notify the user's manager, and file an incident report within 1 hour."
+  },
+  {
+    "id": "KB-008",
+    "title": "Shared Drive Access Missing After Department Transfer",
+    "category": "access",
+    "symptoms": [
+      "User cannot see or access a mapped drive after changing teams",
+      "Drive letter missing after login even though access request submitted",
+      "Old department drive removed but new drive not provisioned"
+    ],
+    "troubleshooting_steps": [
+      "Verify the access request has manager approval: check the IT portal under REQ-XXXX. Approvals are required before provisioning.",
+      "Confirm the user's AD group membership reflects the new department: Get-ADUser <username> -Properties MemberOf.",
+      "If group membership is correct but drive is missing, run 'gpupdate /force' in an elevated PowerShell prompt, then log off and back on.",
+      "If group membership is missing, add the user to the correct AD security group: Add-ADGroupMember -Identity '<Drive-Group>' -Members '<username>'.",
+      "After group add, drive maps apply at next login via Group Policy. Log the user off and back on to confirm.",
+      "If drive still does not appear: check GPO drive mapping in Group Policy Management — confirm the correct OU is targeted.",
+      "Verify DFS namespace is reachable: 'Test-Path \\\\example.com\\dfs\\legal' from the user's machine."
+    ],
+    "escalation_triggers": [
+      "Access request shows approved but AD group was never updated — possible provisioning workflow failure.",
+      "DFS namespace is unreachable from the user's subnet — network team involvement needed.",
+      "User needs access to a folder with non-standard ACLs not controlled by group membership."
+    ],
+    "technician_notes": "Department transfer access delays are often caused by the provisioning workflow running only once daily (overnight). If the request was approved today, provisioning may not run until tonight. Manually adding the AD group is acceptable for urgent cases — document the manual add in the ticket and confirm with the user's manager."
   }
 ]

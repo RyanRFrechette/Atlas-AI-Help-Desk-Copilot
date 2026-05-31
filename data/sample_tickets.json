@@ -1,74 +1,98 @@
 [
   {
     "id": "TKT-001",
-    "subject": "Cannot connect to VPN from home",
-    "description": "Since this morning I'm unable to connect to the corporate VPN. I get error code 691. Already tried restarting my computer.",
-    "category": "network",
-    "priority": "high",
+    "subject": "Password reset — locked out of laptop login",
+    "description": "Hi IT, I forgot my Windows password over the weekend. I tried three times and now the account is locked. I have MFA set up on my phone. Can someone help me reset it? I need to get in before our 9 AM standup.",
+    "category": "access",
+    "priority": "medium",
     "status": "open",
-    "submitter": "alice.jones@example.com"
+    "submitter": "Marcus Webb",
+    "department": "Human Resources",
+    "created_at": "2026-05-30T07:41:05Z",
+    "expected_escalation": false
   },
   {
     "id": "TKT-002",
-    "subject": "Outlook keeps crashing on startup",
-    "description": "Outlook crashes immediately after the splash screen on my Windows 11 laptop. This started after last night's Windows Update.",
-    "category": "email",
+    "subject": "Account locked — multiple failed logins from unknown location",
+    "description": "My account has been locked three times today. I only tried logging in once this morning from my home office. The other lockouts happened while I was in a meeting with no devices open. Something is wrong — I did not attempt those logins. My manager is asking me to report this to IT security immediately.",
+    "category": "access",
     "priority": "high",
     "status": "open",
-    "submitter": "bob.smith@example.com"
+    "submitter": "Diana Souza",
+    "department": "Finance",
+    "created_at": "2026-05-30T09:17:33Z",
+    "expected_escalation": true
   },
   {
     "id": "TKT-003",
-    "subject": "Need access to the finance shared drive",
-    "description": "I joined the finance team last week and still don't have read access to the Q: drive. My manager is Sarah Chen.",
-    "category": "access",
-    "priority": "medium",
+    "subject": "Laptop extremely slow after startup — 12+ minute boot time",
+    "description": "Since Tuesday's Windows Update my Dell Latitude 5540 takes over 12 minutes to become usable after login. Task Manager shows 100% disk usage for the first 10 minutes. Everything is sluggish — even opening File Explorer takes 30 seconds. I have restarted several times with no improvement.",
+    "category": "hardware",
+    "priority": "low",
     "status": "open",
-    "submitter": "carol.wu@example.com"
+    "submitter": "Kevin Park",
+    "department": "Engineering",
+    "created_at": "2026-05-29T14:52:10Z",
+    "expected_escalation": false
   },
   {
     "id": "TKT-004",
-    "subject": "Printer on floor 3 offline",
-    "description": "The HP LaserJet on the third floor shows offline in the print queue. Multiple users affected.",
+    "subject": "Floor 2 HP LaserJet Pro offline — five users blocked",
+    "description": "The shared HP LaserJet Pro M404dn on the second floor has shown offline in the print queue since 8 AM. At least five people on our team cannot print. We have a client proposal due at noon and need hard copies. I already tried power-cycling the printer but it still shows offline on all our machines.",
     "category": "hardware",
     "priority": "medium",
     "status": "open",
-    "submitter": "david.park@example.com"
+    "submitter": "Linda Osei",
+    "department": "Marketing",
+    "created_at": "2026-05-30T08:04:47Z",
+    "expected_escalation": false
   },
   {
     "id": "TKT-005",
-    "subject": "Password reset request",
-    "description": "Locked out of my account after too many failed login attempts. Need a password reset ASAP — I have a presentation in one hour.",
-    "category": "access",
-    "priority": "urgent",
-    "status": "open",
-    "submitter": "eve.martin@example.com"
+    "subject": "VPN drops every 20–30 minutes — cannot stay connected remotely",
+    "description": "I have been working from home all week and my VPN keeps disconnecting every 20 to 30 minutes. When it drops I lose access to the CRM, internal SharePoint, and email. Reconnecting takes 2–3 minutes each time. My home internet is stable — speed test shows 200 Mbps and I have no issues on non-VPN sites. Using GlobalProtect 6.2 client on Windows 11.",
+    "category": "network",
+    "priority": "high",
+    "status": "in_progress",
+    "submitter": "Carlos Rivera",
+    "department": "Sales",
+    "created_at": "2026-05-28T11:30:18Z",
+    "expected_escalation": false
   },
   {
     "id": "TKT-006",
-    "subject": "Slack notifications not working on mobile",
-    "description": "I stopped receiving push notifications from Slack on my iPhone about three days ago. Desktop notifications still work fine.",
-    "category": "software",
-    "priority": "low",
+    "subject": "Outlook inbox not syncing — missing emails for 18 hours",
+    "description": "My Outlook desktop client stopped syncing yesterday afternoon around 3 PM. The status bar shows 'Connected' but new emails are not appearing. I can see the missing emails on Outlook Web App (OWA) and on my phone, so the mailbox is fine. I have tried restarting Outlook and running Outlook in safe mode — neither helped. Running Microsoft 365 on Windows 11.",
+    "category": "email",
+    "priority": "medium",
     "status": "open",
-    "submitter": "frank.lee@example.com"
+    "submitter": "Sandra Kim",
+    "department": "Operations",
+    "created_at": "2026-05-29T09:03:55Z",
+    "expected_escalation": false
   },
   {
     "id": "TKT-007",
-    "subject": "Request new laptop — current one overheating",
-    "description": "My Dell XPS 15 is shutting down due to overheating. It's four years old and the fan is loud constantly. Requesting replacement hardware.",
-    "category": "hardware",
-    "priority": "medium",
+    "subject": "Suspicious phishing email — credential harvesting attempt, did not click",
+    "description": "I received an email this morning at 7:52 AM appearing to come from 'IT Support <helpdesk@it-corpintranet.net>'. The message claimed my corporate password was expiring in 24 hours and asked me to click a link to a page at 'corp-portal-login.net'. I recognized the domain as fake — our real portal is at portal.example.com. I did NOT click the link. I have forwarded the full email headers to security@example.com as per policy and deleted the original. Attaching screenshot of the email. Flagging in case others received the same message.",
+    "category": "security",
+    "priority": "urgent",
     "status": "open",
-    "submitter": "grace.nguyen@example.com"
+    "submitter": "Jerome Whitfield",
+    "department": "Information Technology",
+    "created_at": "2026-05-30T08:11:42Z",
+    "expected_escalation": true
   },
   {
     "id": "TKT-008",
-    "subject": "Teams video calls pixelated and laggy",
-    "description": "All my Microsoft Teams video calls are very low quality and choppy. Audio is fine. Network speed test shows 150 Mbps down.",
-    "category": "network",
+    "subject": "No access to Legal shared drive after department transfer",
+    "description": "I transferred from the Compliance team to Legal three days ago. My old Compliance shared drive (P: drive) has been removed from my profile, which is expected, but I still have no access to the Legal team drive (L: drive). My new manager Rachel Tran submitted an access request on Monday — I have the ticket number from her (REQ-2891). The drive does not appear even after logging off and back on. I need this access to work on the contract review due Friday.",
+    "category": "access",
     "priority": "medium",
     "status": "open",
-    "submitter": "henry.okafor@example.com"
+    "submitter": "Priya Anand",
+    "department": "Legal",
+    "created_at": "2026-05-28T15:44:29Z",
+    "expected_escalation": false
   }
 ]
