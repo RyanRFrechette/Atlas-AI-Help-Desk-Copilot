@@ -92,14 +92,24 @@ Use this script for a live demo, screen share, or recorded walkthrough. The phis
 
 ## Automated Recording Mode
 
-**URL:** `http://localhost:8501?demo=video`
+**Auto-scroll URL (recommended):** `http://localhost:8501?demo=video&autoscroll=1`
+**Manual scroll URL:** `http://localhost:8501?demo=video`
 
 **Launch (PowerShell from repo root):**
 ```powershell
 .\scripts\Start-AtlasDemoRecording.ps1
 ```
 
-Or manually: `streamlit run app.py` then open `http://localhost:8501?demo=video`
+Or manually: `streamlit run app.py` then open the URL above.
+
+### OBS Browser Source (no screen share needed)
+
+1. In OBS: Add Source → Browser Source
+2. URL: `http://localhost:8501?demo=video&autoscroll=1`
+3. Set width: `1920`, height: `1080`
+4. Start recording
+5. Click **Refresh** in the Browser Source properties — page loads, scroll starts after 3 seconds
+6. Stop recording after footer disclaimer (~75–80 seconds)
 
 ### What it shows (no clicks required)
 

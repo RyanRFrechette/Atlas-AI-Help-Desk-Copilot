@@ -1,4 +1,5 @@
 import streamlit as st
+import streamlit.components.v1 as components
 from src.atlas.demo_data import load_sample_tickets
 from src.atlas.triage import triage_ticket
 
@@ -65,6 +66,7 @@ st.divider()
 # ── Demo mode — ?ticket=TKT-007 pre-selects and auto-analyzes ────────────────
 _demo_id = st.query_params.get("ticket", "")
 _demo_video = st.query_params.get("demo", "") == "video"
+_autoscroll = _demo_video and st.query_params.get("autoscroll", "") == "1"
 
 if _demo_video:
     _phishing = next(t for t in tickets if t["id"] == "TKT-007")
@@ -80,6 +82,26 @@ if _demo_video:
         "classifies tickets, surfaces KB articles, and generates technician guidance "
         "so agents spend less time on intake and more time resolving."
     )
+    if _autoscroll:
+        components.html(
+            """<script>
+(function(){
+    var delay=3000, dur=75000;
+    setTimeout(function(){
+        var t0=null, y0=window.parent.scrollY;
+        function maxY(){ return window.parent.document.documentElement.scrollHeight - window.parent.innerHeight; }
+        function step(ts){
+            if(!t0) t0=ts;
+            var p=Math.min((ts-t0)/dur, 1);
+            window.parent.scrollTo(0, y0+(maxY()-y0)*p);
+            if(p<1) window.parent.requestAnimationFrame(step);
+        }
+        window.parent.requestAnimationFrame(step);
+    }, delay);
+})();
+</script>""",
+            height=0,
+        )
     st.divider()
 
     # ── Selected Ticket Summary ───────────────────────────────────────────────
