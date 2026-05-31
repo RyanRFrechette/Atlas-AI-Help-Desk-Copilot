@@ -1,0 +1,74 @@
+[
+  {
+    "id": "TKT-001",
+    "subject": "Cannot connect to VPN from home",
+    "description": "Since this morning I'm unable to connect to the corporate VPN. I get error code 691. Already tried restarting my computer.",
+    "category": "network",
+    "priority": "high",
+    "status": "open",
+    "submitter": "alice.jones@example.com"
+  },
+  {
+    "id": "TKT-002",
+    "subject": "Outlook keeps crashing on startup",
+    "description": "Outlook crashes immediately after the splash screen on my Windows 11 laptop. This started after last night's Windows Update.",
+    "category": "email",
+    "priority": "high",
+    "status": "open",
+    "submitter": "bob.smith@example.com"
+  },
+  {
+    "id": "TKT-003",
+    "subject": "Need access to the finance shared drive",
+    "description": "I joined the finance team last week and still don't have read access to the Q: drive. My manager is Sarah Chen.",
+    "category": "access",
+    "priority": "medium",
+    "status": "open",
+    "submitter": "carol.wu@example.com"
+  },
+  {
+    "id": "TKT-004",
+    "subject": "Printer on floor 3 offline",
+    "description": "The HP LaserJet on the third floor shows offline in the print queue. Multiple users affected.",
+    "category": "hardware",
+    "priority": "medium",
+    "status": "open",
+    "submitter": "david.park@example.com"
+  },
+  {
+    "id": "TKT-005",
+    "subject": "Password reset request",
+    "description": "Locked out of my account after too many failed login attempts. Need a password reset ASAP — I have a presentation in one hour.",
+    "category": "access",
+    "priority": "urgent",
+    "status": "open",
+    "submitter": "eve.martin@example.com"
+  },
+  {
+    "id": "TKT-006",
+    "subject": "Slack notifications not working on mobile",
+    "description": "I stopped receiving push notifications from Slack on my iPhone about three days ago. Desktop notifications still work fine.",
+    "category": "software",
+    "priority": "low",
+    "status": "open",
+    "submitter": "frank.lee@example.com"
+  },
+  {
+    "id": "TKT-007",
+    "subject": "Request new laptop — current one overheating",
+    "description": "My Dell XPS 15 is shutting down due to overheating. It's four years old and the fan is loud constantly. Requesting replacement hardware.",
+    "category": "hardware",
+    "priority": "medium",
+    "status": "open",
+    "submitter": "grace.nguyen@example.com"
+  },
+  {
+    "id": "TKT-008",
+    "subject": "Teams video calls pixelated and laggy",
+    "description": "All my Microsoft Teams video calls are very low quality and choppy. Audio is fine. Network speed test shows 150 Mbps down.",
+    "category": "network",
+    "priority": "medium",
+    "status": "open",
+    "submitter": "henry.okafor@example.com"
+  }
+]

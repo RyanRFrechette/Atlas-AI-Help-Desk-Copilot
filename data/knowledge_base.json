@@ -1,0 +1,71 @@
+[
+  {
+    "id": "KB-001",
+    "category": "network",
+    "title": "VPN Connection Failures (Error 691)",
+    "steps": [
+      "Verify credentials — error 691 is usually wrong username or password.",
+      "Ensure you are using the correct VPN profile (corporate vs. split-tunnel).",
+      "Disable any third-party firewalls temporarily and retry.",
+      "Flush DNS: run 'ipconfig /flushdns' in an elevated command prompt.",
+      "If issue persists, submit ticket with output of 'ipconfig /all'."
+    ]
+  },
+  {
+    "id": "KB-002",
+    "category": "email",
+    "title": "Outlook Crashes After Windows Update",
+    "steps": [
+      "Open Outlook in safe mode: hold Ctrl while clicking the Outlook icon.",
+      "If safe mode works, disable add-ins one by one under File > Options > Add-ins.",
+      "Run 'Office Repair' via Control Panel > Programs > Microsoft 365.",
+      "If crash persists, collect crash dump from Event Viewer and escalate."
+    ]
+  },
+  {
+    "id": "KB-003",
+    "category": "access",
+    "title": "Shared Drive Access Request",
+    "steps": [
+      "Manager must submit an access request via the IT portal.",
+      "Access is provisioned within one business day of manager approval.",
+      "Drive mappings auto-apply at next login; no manual mapping needed.",
+      "If drive does not appear after 24 hours, run 'gpupdate /force' and log off/on."
+    ]
+  },
+  {
+    "id": "KB-004",
+    "category": "hardware",
+    "title": "Offline Network Printer — Quick Fixes",
+    "steps": [
+      "Check the printer LCD for error messages or paper jams.",
+      "Power-cycle the printer (off, wait 30 seconds, on).",
+      "Verify the printer IP has not changed — compare to the IT asset register.",
+      "Delete and re-add the printer on affected machines if IP changed.",
+      "For persistent offline status, escalate to on-site hardware support."
+    ]
+  },
+  {
+    "id": "KB-005",
+    "category": "access",
+    "title": "Account Lockout and Password Reset",
+    "steps": [
+      "Self-service reset available at password.example.com if MFA is enrolled.",
+      "For urgent resets, call the IT hotline: ext. 4357 (HELP).",
+      "After reset, update saved credentials in browser and mail clients.",
+      "Three or more lockouts in one day triggers a security review."
+    ]
+  },
+  {
+    "id": "KB-006",
+    "category": "network",
+    "title": "Microsoft Teams Video Quality Issues",
+    "steps": [
+      "Lower Teams video resolution: Settings > Devices > reduce camera resolution.",
+      "Check for background applications consuming bandwidth.",
+      "Switch to wired Ethernet if on Wi-Fi.",
+      "Update Teams to the latest version via Help > Check for updates.",
+      "If on VPN, try split-tunnel mode to reduce video traffic through the tunnel."
+    ]
+  }
+]
