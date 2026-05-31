@@ -135,7 +135,7 @@
       "Check M365 service health first: admin.microsoft.com > Health > Service health. Rule out tenant-wide outage.",
       "Remove and re-add the Exchange account: File > Account Settings > select account > Remove, then re-add.",
       "If removing the account is not practical, try clearing the Outlook cache: rename the OST file at %localappdata%\\Microsoft\\Outlook\\. Outlook will rebuild it.",
-      "Run 'Outlook /cleanprofile' from Run (Win+R) to reset the Outlook profile.",
+      "Create a new Outlook profile: Control Panel > Mail (Microsoft Outlook) > Show Profiles > Add. Set as default and test before removing the old profile.",
       "Check for conflicting add-ins: File > Options > Add-ins > COM Add-ins > disable all, restart, re-enable one by one.",
       "Verify AutoDiscover is working: hold Ctrl, right-click the Outlook tray icon > Test Email AutoConfiguration.",
       "If AutoDiscover fails, check DNS for autodiscover.example.com CNAME record — may need IT network team."
@@ -172,7 +172,7 @@
       "More than three users received the same phishing email — treat as targeted campaign.",
       "Email passed SPF/DKIM/DMARC checks — indicates possible vendor account compromise."
     ],
-    "technician_notes": "All phishing reports must be logged in the security ticketing queue regardless of whether the user clicked. Check the sender domain against known phishing feeds (VirusTotal, URLhaus). If credentials were entered, initiate the Credential Compromise playbook: force password reset, revoke all sessions in Entra ID (Revoke-AzureADUserAllRefreshToken), notify the user's manager, and file an incident report within 1 hour."
+    "technician_notes": "All phishing reports must be logged in the security ticketing queue regardless of whether the user clicked. Check the sender domain against known phishing feeds (VirusTotal, URLhaus). If credentials were entered, initiate the Credential Compromise playbook: force password reset, revoke all active sessions in Entra ID (portal: Users > select user > Revoke sessions, or PowerShell: Revoke-MgUserSignInSession), notify the user's manager, and file an incident report within 1 hour."
   },
   {
     "id": "KB-008",

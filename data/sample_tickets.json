@@ -40,7 +40,7 @@
     "subject": "Floor 2 HP LaserJet Pro offline — five users blocked",
     "description": "The shared HP LaserJet Pro M404dn on the second floor has shown offline in the print queue since 8 AM. At least five people on our team cannot print. We have a client proposal due at noon and need hard copies. I already tried power-cycling the printer but it still shows offline on all our machines.",
     "category": "hardware",
-    "priority": "medium",
+    "priority": "high",
     "status": "open",
     "submitter": "Linda Osei",
     "department": "Marketing",

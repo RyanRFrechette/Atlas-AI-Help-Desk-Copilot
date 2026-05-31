@@ -63,7 +63,7 @@ m4.metric("Security Tickets", security_count)
 st.divider()
 
 # ── Ticket Input ───────────────────────────────────────────────────────────────
-st.subheader("Ticket Input")
+st.subheader("Analyze a Ticket")
 input_left, input_right = st.columns([3, 1])
 
 with input_left:
