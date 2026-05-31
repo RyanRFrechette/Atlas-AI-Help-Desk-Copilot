@@ -4,31 +4,32 @@ AI-powered triage and knowledge assistant for IT help desk teams.
 
 ## Purpose
 
-Atlas reduces ticket resolution time by automatically categorizing incoming support tickets, surfacing relevant knowledge base articles, and suggesting next steps — giving agents a head start on every case.
+Atlas reduces ticket resolution time by classifying support tickets, surfacing relevant KB articles, and suggesting next steps — giving agents a head start on every case.
 
-## Planned Features
+## Stack
 
-- Ticket triage: classify by category, urgency, and suggested owner
-- Knowledge base search: surface relevant troubleshooting guides per ticket
-- Response drafting: generate first-draft replies for common issues
-- Dashboard: live queue overview with priority scoring
-- Feedback loop: agents confirm/correct suggestions to improve accuracy
+- Streamlit (UI)
+- JSON demo data (no live systems)
+- pytest (tests)
 
-## Local Setup
+## Setup
 
-```bash
+```powershell
 python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# macOS/Linux
-source .venv/bin/activate
-
+.venv\Scripts\Activate.ps1
 pip install -r requirements.txt
 streamlit run app.py
 ```
 
-## Running Tests
+## Tests
 
-```bash
+```powershell
 pytest
 ```
+
+## Phase Plan
+
+- **Phase 0** — Scaffold, CLAUDE.md, agents (current)
+- Phase 1 — Demo data, triage engine, Streamlit UI
+- Phase 2 — KB search, response drafting, dashboard
+- Phase 3 — Screenshot proof, docs, portfolio polish
