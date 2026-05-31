@@ -134,14 +134,43 @@ Atlas-AI-Help-Desk-Copilot/
 
 ## Screenshots
 
-*Screenshots will be added in Phase 6.*
+### Dashboard — Queue Overview
 
-| Screen | Description |
-|---|---|
-| Dashboard | Queue metrics and ticket selector |
-| Phishing triage | Critical risk + escalation banner |
-| Troubleshooting checklist | Step-by-step KB checklist |
-| Resolution template | Post-resolution documentation |
+![Atlas dashboard showing 8 demo tickets with high/urgent count, escalation candidates, and security ticket metrics](docs/screenshots/01-dashboard.png)
+
+*Dashboard on load: 8 tickets in queue, 4 high/urgent, 2 escalation candidates, 1 security ticket. Ticket selector and custom input ready for analysis.*
+
+---
+
+### Phishing Ticket Triage — Critical Risk + Escalation
+
+![Atlas triage results for a phishing ticket showing Critical risk level and escalation recommended banner](docs/screenshots/02-ticket-triage.png)
+
+*TKT-007: Phishing email reported by an IT staff member. Atlas detects security keywords, overrides the category to Security, sets risk to Critical, and fires the escalation banner with a specific reason — before the technician has done anything.*
+
+---
+
+### Troubleshooting Plan — KB Articles and Checklist
+
+![Atlas KB article matches and step-by-step troubleshooting checklist for a VPN connectivity issue](docs/screenshots/03-troubleshooting-plan.png)
+
+*TKT-005: Repeating VPN drops. Atlas matches the GlobalProtect stability KB article, expands escalation triggers, and generates a ranked checklist — MTU check, power management fix, and gateway log review — ready for the technician to work through.*
+
+---
+
+### Documentation Output — Resolution Template
+
+![Atlas resolution documentation template pre-filled with ticket metadata for a shared drive access issue](docs/screenshots/04-documentation-output.png)
+
+*TKT-008: Shared drive missing after department transfer. The resolution template is pre-filled with ticket ID, category, priority, risk level, and escalation status — technician fills in root cause and steps taken after resolving.*
+
+---
+
+### README Preview — Portfolio Documentation
+
+![Atlas README rendered in VS Code Markdown preview showing embedded screenshots and structured documentation](docs/screenshots/05-readme-preview.png)
+
+*The README is written HR-first: headline, what it proves, demo workflow, and honest limitations — before the technical stack. A hiring manager can assess the project in under 2 minutes without cloning it.*
 
 ---
 

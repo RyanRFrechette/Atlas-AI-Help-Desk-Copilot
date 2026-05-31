@@ -62,13 +62,20 @@ m4.metric("Security Tickets", security_count)
 
 st.divider()
 
+# ── Demo mode — ?ticket=TKT-007 pre-selects and auto-analyzes ────────────────
+_demo_id = st.query_params.get("ticket", "")
+
 # ── Ticket Input ───────────────────────────────────────────────────────────────
 st.subheader("Analyze a Ticket")
 input_left, input_right = st.columns([3, 1])
 
 with input_left:
     ticket_options = {f"[{t['id']}] {t['subject']}": t for t in tickets}
-    selected_label = st.selectbox("Sample ticket", options=list(ticket_options.keys()))
+    _labels = list(ticket_options.keys())
+    _default_idx = next(
+        (i for i, lbl in enumerate(_labels) if _demo_id in lbl), 0
+    ) if _demo_id else 0
+    selected_label = st.selectbox("Sample ticket", options=_labels, index=_default_idx)
     selected_ticket = ticket_options[selected_label]
 
     st.markdown(
@@ -109,8 +116,8 @@ with input_right:
 analyze = st.button("⚡ Analyze Ticket", type="primary", use_container_width=True)
 
 # ── Triage Results ─────────────────────────────────────────────────────────────
-if analyze:
-    if custom_subject.strip() or custom_desc.strip():
+if analyze or _demo_id:
+    if not _demo_id and (custom_subject.strip() or custom_desc.strip()):
         active_ticket: dict = {
             "id": "TKT-CUSTOM",
             "subject": custom_subject.strip() or "(no subject)",
