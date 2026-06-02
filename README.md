@@ -1,5 +1,11 @@
 # Atlas AI Help Desk Copilot
 
+## Recruiter TL;DR
+
+Help desk triage tool built with Python and Streamlit. Classifies support tickets by category and priority, surfaces matching KB articles, generates technician checklists and response drafts, and flags phishing/security tickets for escalation. Demonstrates Tier 1 help desk workflow knowledge — ticket intake, triage logic, escalation awareness, and documentation. Python and tests are secondary to the support domain focus.
+
+---
+
 **A deterministic triage assistant that classifies IT support tickets, surfaces knowledge base articles, and generates technician guidance — built to demonstrate real help desk workflows without any live systems or AI dependencies.**
 
 ---
@@ -9,7 +15,7 @@
 This project demonstrates practical IT support skills alongside Python development:
 
 - **Help desk domain knowledge** — ticket triage logic, escalation rules, and KB article structure reflect real Tier 1/2 workflows
-- **Security awareness** — phishing detection, credential compromise handling, and escalation paths follow actual incident response practices
+- **Escalation awareness** — phishing detection, credential compromise handling, and escalation paths follow structured help desk escalation practices
 - **Tool-building for IT teams** — a working Streamlit app a real help desk agent could walk through during a demo
 - **Test-driven development** — 32 passing tests covering data validation, triage logic, and module integrity
 - **Professional documentation** — structured runbooks, case study, and demo script
